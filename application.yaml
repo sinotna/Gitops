@@ -8,13 +8,7 @@ spec:
   source:
     repoURL: https://github.com/sinotna/Gitops.git
     targetRevision: HEAD
-    path: apps
+    path: app-root
   destination: 
     server: https://kubernetes.default.svc
     namespace: default
-  syncPolicy:
-    syncOptions:
-    - CreateNamespace=true
-    automated:
-      selfHeal: true
-      prune: true
