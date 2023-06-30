@@ -1,0 +1,7 @@
+*.swp
+*.orig
+*.tgz
+#Generally a good practice to commit the Chart.lock file to avoid inconsistencies and ensure reproducibility of deployments
+.DS_Store
+*/charts/**
+.vscode/*
