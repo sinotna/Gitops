@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/sinotna/Gitops.git
     targetRevision: HEAD
-    path: ../{{ $appname }}
+    path: {{ $appname }}
   destination: 
     server: https://kubernetes.default.svc
     namespace: {{ $values.namespace }}
