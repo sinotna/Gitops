@@ -1,0 +1,5 @@
+apiVersion: v2
+name: app-root
+description: Generates the applications resource files
+
+version: 1.0.0

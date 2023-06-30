@@ -1,0 +1,4 @@
+applications:
+  apps/kubenetes-dashboard:
+    namespace: default
+  
