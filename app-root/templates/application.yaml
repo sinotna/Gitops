@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: https://github.com/sinotna/Gitops.git
     targetRevision: main
-    path: {{ trimPrefix "apps/" $appname }}
+    path: apps/{{ trimPrefix "apps/" $appname }}
   destination: 
     server: https://kubernetes.default.svc
     namespace: {{ $values.namespace }}

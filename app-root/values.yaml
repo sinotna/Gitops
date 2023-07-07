@@ -1,4 +1,4 @@
 applications:
-  kubenetes-dashboard:
+  kubernetes-dashboard:
     namespace: default
   
