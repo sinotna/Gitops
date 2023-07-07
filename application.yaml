@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/sinotna/Gitops.git
-    targetRevision: HEAD
+    targetRevision: main
     path: app-root
   destination: 
     server: https://kubernetes.default.svc
