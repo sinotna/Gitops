@@ -13,7 +13,8 @@ spec:
     spec:
       project: default # Target project/namespace where the instances will be deployed 
       source:
-        repoURL: https://github.com/example/myapp-repo.git # Git repository URL of your application code/configs
+        repoURL: https://github.com/sinotna/Gitops.git # Git repository URL of your application code/configs
+        path: /Apps
       
       destination:
         server: https://kubernetes.default.svc # Kubernetes cluster API endpoint
