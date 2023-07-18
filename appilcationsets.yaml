@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: myappset
+spec:
+  generators:
+    - clusterDecisionResource:
+        group: apps.example.com
+        version: v1alpha1
+        kind: MyAppCRD
+
+  template:
+    spec:
+      project: default # Target project/namespace where the instances will be deployed 
+      source:
+        repoURL: https://github.com/example/myapp-repo.git # Git repository URL of your application code/configs
+      
+      destination:
+        server: https://kubernetes.default.svc # Kubernetes cluster API endpoint
+      
+      syncPolicy:
+        automated:
+          prune: true # Enable pruning to remove resources not defined in the target manifests
+  
+  valuesGenerator:
+    configMapRefNameKeySelectorPathElementsPrefixesFromClusterDecisionResourceNamespacedFieldReferenceAPIVersionsAndKindsSourcesValuesKeySelectorsJSONPointersWithCustomValueFieldsForGeneratorsConfigMapsDataKeysToSelectValuesFromTheReferencedConfigMapsReferencesInOrderToGenerateAListOfValuesForEachInstanceUsingTheSelectedValueAsPartOfTheInstanceNameInTheSpecTemplateMetadataNamePropertyStringListArraySliceTypeExampleconfigmapRefnamekeyselectorpathelementsprefixesfromclusterdecisionresourcenamespacedfieldreferenceapiversionsandkindssourcesvalueskeyselectorsjsonpointerswithcustomvaluefieldsforgeneratorsconfigmapsdatakeystoselectvaluesfromthereferencedconfigmapsreferencesinordertogeneratealistofvaluesforeachinstanceusingtheselectedvalueaspartoftheinstancenameinthespectemplatemetadatanamepropertystringlistarrayslicetypeexample
+ 
