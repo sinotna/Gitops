@@ -7,7 +7,7 @@ spec:
   generators:
   - git:
       repoURL: https://github.com/sinotna/Gitops.git
-      revision: main
+      revision: HEAD
       directories:
       - path: "/Apps/*"
   template:
@@ -17,7 +17,7 @@ spec:
       project: 'default' # all Applications are created on project 'default'
       source:
         repoURL: https://github.com/sinotna/Gitops.git
-        targetRevision: main # can be set via the cluster config.json
+        targetRevision: HEAD # can be set via the cluster config.json
         path: '{{ "{{" }}path{{ "}}" }}'
         helm:
           ignoreMissingValueFiles: true
