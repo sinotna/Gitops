@@ -2,23 +2,23 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: myappset
-  namespace: default
+  namespace: argocd
 spec:
   generators:
   - git:
       repoURL: https://github.com/sinotna/Gitops.git
       revision: HEAD
       directories:
-      - path: "/Apps/*"
+      - path: "Apps/*"
   template:
     metadata:
-      name: '{{ "{{" }}path.basename{{ "}}" }}' # name of the application
+      name: '{{ path.basename }}' # name of the application
     spec:
       project: 'default' # all Applications are created on project 'default'
       source:
         repoURL: https://github.com/sinotna/Gitops.git
         targetRevision: HEAD # can be set via the cluster config.json
-        path: '{{ "{{" }}path{{ "}}" }}'
+        path: '{{ path }}'
         helm:
           ignoreMissingValueFiles: true
           valueFiles:
@@ -26,7 +26,7 @@ spec:
           - values-env.yaml
       destination:
         server: 'https://kubernetes.default.svc' # default value
-        namespace: tools
+        namespace: default
       syncPolicy:
         automated:
           prune: true

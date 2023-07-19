@@ -1,8 +1,0 @@
-applications:
-  kubernetes-dashboard:
-    namespace: default
-  istio-base:
-    namespace: istio-system
-  istiod:
-    namespace: istio-system
-  
