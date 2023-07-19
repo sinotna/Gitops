@@ -2,27 +2,32 @@ apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
   name: myappset
+  namespace: default
 spec:
   generators:
-    - clusterDecisionResource:
-        group: apps.example.com
-        version: v1alpha1
-        kind: MyAppCRD
-
+  - git:
+      repoURL: https://github.com/sinotna/Gitops.git
+      revision: main
+      directories:
+      - path: "/Apps/*"
   template:
+    metadata:
+      name: '{{ "{{" }}path.basename{{ "}}" }}' # name of the application
     spec:
-      project: default # Target project/namespace where the instances will be deployed 
+      project: 'default' # all Applications are created on project 'default'
       source:
-        repoURL: https://github.com/sinotna/Gitops.git # Git repository URL of your application code/configs
-        path: /Apps
-      
+        repoURL: https://github.com/sinotna/Gitops.git
+        targetRevision: main # can be set via the cluster config.json
+        path: '{{ "{{" }}path{{ "}}" }}'
+        helm:
+          ignoreMissingValueFiles: true
+          valueFiles:
+          - values.yaml
+          - values-env.yaml
       destination:
-        server: https://kubernetes.default.svc # Kubernetes cluster API endpoint
-      
+        server: 'https://kubernetes.default.svc' # default value
+        namespace: tools
       syncPolicy:
         automated:
-          prune: true # Enable pruning to remove resources not defined in the target manifests
-  
-  valuesGenerator:
-    configMapRefNameKeySelectorPathElementsPrefixesFromClusterDecisionResourceNamespacedFieldReferenceAPIVersionsAndKindsSourcesValuesKeySelectorsJSONPointersWithCustomValueFieldsForGeneratorsConfigMapsDataKeysToSelectValuesFromTheReferencedConfigMapsReferencesInOrderToGenerateAListOfValuesForEachInstanceUsingTheSelectedValueAsPartOfTheInstanceNameInTheSpecTemplateMetadataNamePropertyStringListArraySliceTypeExampleconfigmapRefnamekeyselectorpathelementsprefixesfromclusterdecisionresourcenamespacedfieldreferenceapiversionsandkindssourcesvalueskeyselectorsjsonpointerswithcustomvaluefieldsforgeneratorsconfigmapsdatakeystoselectvaluesfromthereferencedconfigmapsreferencesinordertogeneratealistofvaluesforeachinstanceusingtheselectedvalueaspartoftheinstancenameinthespectemplatemetadatanamepropertystringlistarrayslicetypeexample
- 
+          prune: true
+          selfHeal: false
