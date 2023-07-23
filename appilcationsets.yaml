@@ -17,8 +17,8 @@ spec:
     spec:
       project: 'default' # all Applications are created on project 'default'
       source:
-        repoURL: https://github.com/sinotna/Gitops.git
-        targetRevision: HEAD # can be set via the cluster config.json
+        repoURL: {{ appset.parameters.repoURL }}
+        targetRevision: {{ appset.parameters.revision }} # can be set via the cluster config.json
         path: '{{ path }}'
         helm:
           ignoreMissingValueFiles: true
@@ -27,7 +27,7 @@ spec:
           - values-env.yaml
       destination:
         server: 'https://kubernetes.default.svc' # default value
-        namespace: default
+        namespace: {{ appset.parameters.namespace }} 
       syncPolicy:
         automated:
           prune: true
@@ -36,7 +36,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: myappset
+  name: istio
   namespace: istio-system
 spec:
   generators:
@@ -51,8 +51,8 @@ spec:
     spec:
       project: 'default' # all Applications are created on project 'default'
       source:
-        repoURL: https://github.com/sinotna/Gitops.git
-        targetRevision: HEAD # can be set via the cluster config.json
+        repoURL: {{ appset.parameters.repoURL }}
+        targetRevision: {{ appset.parameters.revision }} # can be set via the cluster config.json
         path: '{{ path }}'
         helm:
           ignoreMissingValueFiles: true
@@ -61,7 +61,7 @@ spec:
           - values-env.yaml
       destination:
         server: 'https://kubernetes.default.svc' # default value
-        namespace: istio-system
+        namespace: {{ appset.parameters.namespace }} 
       syncPolicy:
         automated:
           prune: true
