@@ -9,7 +9,7 @@ spec:
       repoURL: https://github.com/sinotna/Gitops.git
       revision: HEAD
       directories:
-      - path: "/Apps/*"
+      - path: "Apps/*"
   template:
     metadata:
       name: '{{ path.basename }}' # name of the application

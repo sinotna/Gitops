@@ -1,4 +1,3 @@
----
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -31,6 +30,7 @@ spec:
       syncPolicy:
         automated:
           prune: true
+<<<<<<< HEAD
           selfHeal: false
 #---
 #apiVersion: argoproj.io/v1alpha1
@@ -66,3 +66,6 @@ spec:
 #        automated:
 #          prune: true
 #          selfHeal: false
+=======
+          selfHeal: false
+>>>>>>> parent of e5d6491 (New application set for istio. Istio is now seperated from the rest of the apps)
