@@ -33,10 +33,11 @@ spec:
           prune: true
           selfHeal: false
 ...
----apiVersion: argoproj.io/v1alpha1
+---
+apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: Istio
+  name: istio
   namespace: argocd
 spec:
   generators:
