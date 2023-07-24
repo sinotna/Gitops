@@ -43,7 +43,7 @@ spec:
   generators:
   - git:
       repoURL: https://github.com/sinotna/Gitops.git
-      revision: HEAD
+      revision: Istio
       directories:
       - path: "Tools/Istio/*"
   template:
