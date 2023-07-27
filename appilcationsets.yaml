@@ -24,7 +24,6 @@ spec:
           ignoreMissingValueFiles: true
           valueFiles:
           - values.yaml
-          - values-env.yaml
       destination:
         server: 'https://kubernetes.default.svc' # default value
         namespace: default
@@ -45,7 +44,7 @@ spec:
       repoURL: https://github.com/sinotna/Gitops.git
       revision: HEAD
       directories:
-      - path: "Tools/Istio/*"
+      - path: "Istio/*"
   template:
     metadata:
       name: '{{ path.basename }}' # name of the application
@@ -59,7 +58,6 @@ spec:
           ignoreMissingValueFiles: true
           valueFiles:
           - values.yaml
-          - values-env.yaml
       destination:
         server: 'https://kubernetes.default.svc' # default value
         namespace: istio-system
