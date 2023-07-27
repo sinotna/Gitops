@@ -24,7 +24,6 @@ spec:
           ignoreMissingValueFiles: true
           valueFiles:
           - values.yaml
-          - values-env.yaml
       destination:
         server: 'https://kubernetes.default.svc' # default value
         namespace: default
@@ -43,9 +42,9 @@ spec:
   generators:
   - git:
       repoURL: https://github.com/sinotna/Gitops.git
-      revision: Istio
+      revision: HEAD
       directories:
-      - path: "Tools/Istio/*"
+      - path: "Istio/*"
   template:
     metadata:
       name: '{{ path.basename }}' # name of the application
@@ -53,13 +52,12 @@ spec:
       project: 'default' # all Applications are created on project 'default'
       source:
         repoURL: https://github.com/sinotna/Gitops.git
-        targetRevision: Istio # can be set via the cluster config.json
+        targetRevision: HEAD # can be set via the cluster config.json
         path: '{{ path }}'
         helm:
           ignoreMissingValueFiles: true
           valueFiles:
           - values.yaml
-          - values-env.yaml
       destination:
         server: 'https://kubernetes.default.svc' # default value
         namespace: istio-system
@@ -67,3 +65,38 @@ spec:
         automated:
           prune: true
           selfHeal: false
+...
+---
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: tools
+  namespace: argocd
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/sinotna/Gitops.git
+      revision: sealed-secrets
+      directories:
+      - path: "Tools/*"
+  template:
+    metadata:
+      name: '{{ path.basename }}' # name of the application
+    spec:
+      project: 'default' # all Applications are created on project 'default'
+      source:
+        repoURL: https://github.com/sinotna/Gitops.git
+        targetRevision: sealed-secrets # can be set via the cluster config.json
+        path: '{{ path }}'
+        helm:
+          ignoreMissingValueFiles: true
+          valueFiles:
+          - values.yaml
+      destination:
+        server: 'https://kubernetes.default.svc' # default value
+        namespace: tools
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: false
+...
