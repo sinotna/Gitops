@@ -43,7 +43,7 @@ spec:
   generators:
   - git:
       repoURL: https://github.com/sinotna/Gitops.git
-      revision: Istio
+      revision: HEAD
       directories:
       - path: "Tools/Istio/*"
   template:
@@ -53,7 +53,7 @@ spec:
       project: 'default' # all Applications are created on project 'default'
       source:
         repoURL: https://github.com/sinotna/Gitops.git
-        targetRevision: Istio # can be set via the cluster config.json
+        targetRevision: HEAD # can be set via the cluster config.json
         path: '{{ path }}'
         helm:
           ignoreMissingValueFiles: true
@@ -67,3 +67,4 @@ spec:
         automated:
           prune: true
           selfHeal: false
+...
