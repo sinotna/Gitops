@@ -1,14 +1,12 @@
-{{ if .Values.rbac.create }}
+{{ if and (and .Values.rbac.create .Values.rbac.clusterRole) (not .Values.rbac.namespacedRoles) }}
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: secrets-unsealer
-  labels:
-    app.kubernetes.io/name: {{ template "sealed-secrets.name" . }}
-    helm.sh/chart: {{ template "sealed-secrets.chart" . }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/version: {{ .Chart.AppVersion }}
+  name: {{ .Values.rbac.clusterRoleName }}
+  labels: {{- include "sealed-secrets.labels" . | nindent 4 }}
+    {{- if .Values.rbac.labels }}
+    {{- include "sealed-secrets.render" ( dict "value" .Values.rbac.labels "context" $) | nindent 4 }}
+    {{- end }}
 rules:
   - apiGroups:
       - bitnami.com
@@ -30,9 +28,11 @@ rules:
       - secrets
     verbs:
       - get
+      - list
       - create
       - update
       - delete
+      - watch
   - apiGroups:
       - ""
     resources:
@@ -40,4 +40,14 @@ rules:
     verbs:
       - create
       - patch
+  {{- if .Values.additionalNamespaces }}
+  - apiGroups:
+      - ""
+    resources:
+      - namespaces
+    resourceNames:
+      {{- include "sealed-secrets.render" (dict "value" .Values.additionalNamespaces "context" $) | nindent 6 }}
+    verbs:
+      - get
+  {{- end }}
 {{ end }}
