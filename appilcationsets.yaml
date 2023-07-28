@@ -44,7 +44,7 @@ spec:
       repoURL: https://github.com/sinotna/Gitops.git
       revision: HEAD
       directories:
-      - path: "Istio/*"
+      - path: "istio/*"
   template:
     metadata:
       name: '{{ path.basename }}' # name of the application
