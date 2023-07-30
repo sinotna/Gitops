@@ -1,0 +1,12 @@
+namespace: tools
+sealed-secrets:
+  podLabels:
+    app.kubernetes.io/product-name: kubernetes
+  #image:
+  #  registry: mtr.devops.telekom.de
+  #  repository: containerworld/sealed-secrets
+  #  tag: v0.21.0
+  #  pullPolicy: Always
+  rbac:
+    pspEnabled: false
+    

@@ -1,0 +1,10 @@
+apiVersion: v2
+name: sealed-secrets
+description: Chart for managing managing sealed-secrets through stable/sealed-secrets
+
+version: 0.0.1
+
+dependencies:
+  - name: sealed-secrets
+    version: 2.9.0
+    repository: https://bitnami-labs.github.io/sealed-secrets
