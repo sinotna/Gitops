@@ -1,8 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: sealed-secrets
-  labels:
-    # Add labels that the job lands in the right application. Without this label, the job was in root-application AND kibana application.
-    app.kubernetes.io/instance: {{ .Release.Name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
