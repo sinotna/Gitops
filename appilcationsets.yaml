@@ -76,7 +76,7 @@ spec:
   generators:
   - git:
       repoURL: https://github.com/sinotna/Gitops.git
-      revision: sealed-secrets
+      revision: HEAD
       directories:
       - path: "Tools/sealed-secrets"
   template:
