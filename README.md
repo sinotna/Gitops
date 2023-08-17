@@ -6,7 +6,8 @@ ArgoCD
 3. ArgoCD should be up and running now. The secre "argocd/argocd-initial-admin-secret" is created with the admin password
 
 Application Sets
-
+All applications will automatically start after applying the application sets.
+ > kubectl apply -f appilcationsets.yaml
 
 # Sealed Secrets
 
