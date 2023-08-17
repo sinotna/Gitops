@@ -78,7 +78,7 @@ spec:
       repoURL: https://github.com/sinotna/Gitops.git
       revision: sealed-secrets
       directories:
-      - path: "Tools/sealed-secrets/*"
+      - path: "Tools/sealed-secrets"
   template:
     metadata:
       name: '{{ path.basename }}' # name of the application
@@ -86,7 +86,7 @@ spec:
       project: 'default' # all Applications are created on project 'default'
       source:
         repoURL: https://github.com/sinotna/Gitops.git
-        targetRevision: sealed-secrets # can be set via the cluster config.json
+        targetRevision: HEAD # can be set via the cluster config.json
         path: '{{ path }}'
         helm:
           ignoreMissingValueFiles: true
@@ -94,7 +94,7 @@ spec:
           - values.yaml
       destination:
         server: 'https://kubernetes.default.svc' # default value
-        namespace: tools
+        namespace: sealed-secrets
       syncPolicy:
         automated:
           prune: true
