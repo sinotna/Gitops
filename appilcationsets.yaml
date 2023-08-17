@@ -44,7 +44,7 @@ spec:
       repoURL: https://github.com/sinotna/Gitops.git
       revision: HEAD
       directories:
-      - path: "Istio/*"
+      - path: "Tools/istio/*"
   template:
     metadata:
       name: '{{ path.basename }}' # name of the application
@@ -76,7 +76,7 @@ spec:
   generators:
   - git:
       repoURL: https://github.com/sinotna/Gitops.git
-      revision: sealed-secrets
+      revision: HEAD
       directories:
       - path: "Tools/sealed-secrets"
   template:
