@@ -7,9 +7,9 @@ metadata:
 spec:
   generators:
   - git:
-      repoURL: https://github.com/sinotna/Gitops.git
+      repoURL: 'https://github.com/sinotna/Gitops.git'
       revision: applicationsets
-      files::
+      files:
       - path: "*/*/values.yaml"
   template:
     metadata:
@@ -17,7 +17,7 @@ spec:
     spec:
       project: 'default' # all Applications are created on project 'default'
       source:
-        repoURL: https://github.com/sinotna/Gitops.git
+        repoURL: 'https://github.com/sinotna/Gitops.git'
         targetRevision: applicationsets # can be set via the cluster config.json
         path: "{{ .Values.appsetTemplates.path | quote }}"
         helm:
