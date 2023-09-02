@@ -2,101 +2,32 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: myappset
+  name: gitops-appset
   namespace: argocd
 spec:
   generators:
   - git:
-      repoURL: https://github.com/sinotna/Gitops.git
-      revision: HEAD
-      directories:
-      - path: "Apps/*"
+      repoURL: https://gitlab.devops.telekom.de/central-groots/playground/gitops.git
+      revision: dev
+      files:
+      - path: "*/values.yaml"
   template:
     metadata:
-      name: '{{ path.basename }}' # name of the application
+      name: {{ .Values.appsetTemplates.pathBasename | quote }} # name of the application
     spec:
       project: 'default' # all Applications are created on project 'default'
       source:
-        repoURL: https://github.com/sinotna/Gitops.git
+        repoURL: https://gitlab.devops.telekom.de/central-groots/playground/gitops.git
         targetRevision: HEAD # can be set via the cluster config.json
-        path: '{{ path }}'
+        path: {{ .Values.appsetTemplates.path | quote }}
         helm:
           ignoreMissingValueFiles: true
           valueFiles:
           - values.yaml
       destination:
         server: 'https://kubernetes.default.svc' # default value
-        namespace: default
+        namespace: {{ .Values.appsetTemplates.namespace | quote }}
       syncPolicy:
         automated:
           prune: true
           selfHeal: false
-...
----
-apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
-metadata:
-  name: istio
-  namespace: argocd
-spec:
-  generators:
-  - git:
-      repoURL: https://github.com/sinotna/Gitops.git
-      revision: HEAD
-      directories:
-      - path: "Tools/istio/*"
-  template:
-    metadata:
-      name: '{{ path.basename }}' # name of the application
-    spec:
-      project: 'default' # all Applications are created on project 'default'
-      source:
-        repoURL: https://github.com/sinotna/Gitops.git
-        targetRevision: HEAD # can be set via the cluster config.json
-        path: '{{ path }}'
-        helm:
-          ignoreMissingValueFiles: true
-          valueFiles:
-          - values.yaml
-      destination:
-        server: 'https://kubernetes.default.svc' # default value
-        namespace: istio-system
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: false
-...
----
-apiVersion: argoproj.io/v1alpha1
-kind: ApplicationSet
-metadata:
-  name: sealed-secrets
-  namespace: argocd
-spec:
-  generators:
-  - git:
-      repoURL: https://github.com/sinotna/Gitops.git
-      revision: HEAD
-      directories:
-      - path: "Tools/sealed-secrets"
-  template:
-    metadata:
-      name: '{{ path.basename }}' # name of the application
-    spec:
-      project: 'default' # all Applications are created on project 'default'
-      source:
-        repoURL: https://github.com/sinotna/Gitops.git
-        targetRevision: HEAD # can be set via the cluster config.json
-        path: '{{ path }}'
-        helm:
-          ignoreMissingValueFiles: true
-          valueFiles:
-          - values.yaml
-      destination:
-        server: 'https://kubernetes.default.svc' # default value
-        namespace: sealed-secrets
-      syncPolicy:
-        automated:
-          prune: true
-          selfHeal: false
-...
