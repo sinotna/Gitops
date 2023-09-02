@@ -7,26 +7,26 @@ metadata:
 spec:
   generators:
   - git:
-      repoURL: https://gitlab.devops.telekom.de/central-groots/playground/gitops.git
-      revision: dev
+      repoURL: https://github.com/sinotna/Gitops.git
+      revision: applicationsets
       files:
-      - path: "*/values.yaml"
+      - path: "**/values.yaml"
   template:
     metadata:
-      name: {{ .Values.appsetTemplates.pathBasename | quote }} # name of the application
+      name: "{{ .Values.appsetTemplates.pathBasename | quote }}" # name of the application
     spec:
       project: 'default' # all Applications are created on project 'default'
       source:
         repoURL: https://gitlab.devops.telekom.de/central-groots/playground/gitops.git
         targetRevision: HEAD # can be set via the cluster config.json
-        path: {{ .Values.appsetTemplates.path | quote }}
+        path: "{{ .Values.appsetTemplates.path | quote }}"
         helm:
           ignoreMissingValueFiles: true
           valueFiles:
           - values.yaml
       destination:
         server: 'https://kubernetes.default.svc' # default value
-        namespace: {{ .Values.appsetTemplates.namespace | quote }}
+        namespace: "{{ .Values.appsetTemplates.namespace | quote }}"
       syncPolicy:
         automated:
           prune: true
