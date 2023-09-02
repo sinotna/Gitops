@@ -9,8 +9,8 @@ spec:
   - git:
       repoURL: https://github.com/sinotna/Gitops.git
       revision: applicationsets
-      directories::
-      - path: "apps/*"
+      files::
+      - path: "*/*/values.yaml"
   template:
     metadata:
       name: "{{ .Values.appsetTemplates.pathBasename | quote }}" # name of the application
