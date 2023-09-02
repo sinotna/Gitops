@@ -1,4 +1,3 @@
----
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
@@ -13,20 +12,19 @@ spec:
       - path: "*/*/values.yaml"
   template:
     metadata:
-      name: "{{ .Values.appsetTemplates.pathBasename | quote }}" # name of the application
+      name: '{{path.basename}}'
     spec:
-      project: 'default' # all Applications are created on project 'default'
+      project: 'default'
       source:
         repoURL: 'https://github.com/sinotna/Gitops.git'
-        targetRevision: applicationsets # can be set via the cluster config.json
-        path: "{{ .Values.appsetTemplates.path | quote }}"
+        targetRevision: applicationsets
+        path: "{{path}}"
         helm:
-          ignoreMissingValueFiles: true
           valueFiles:
           - values.yaml
       destination:
-        server: 'https://kubernetes.default.svc' # default value
-        namespace: "{{ .Values.appsetTemplates.namespace | quote }}"
+        server: 'https://kubernetes.default.svc'
+        namespace: '{{namespace}}'
       syncPolicy:
         automated:
           prune: true
