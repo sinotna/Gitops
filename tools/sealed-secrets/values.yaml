@@ -1,3 +1,4 @@
+namespace: tools
 ## @section Common parameters
 
 ## @param kubeVersion Override Kubernetes version
