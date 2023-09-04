@@ -3187,8 +3187,8 @@ notifications:
     # For more information: https://argocd-notifications.readthedocs.io/en/stable/triggers/#default-triggers
     # defaultTriggers: |
     #   - on-sync-status-unknown
-appsetTemplates:
-  path: '{{path}}'
-  pathBasename: '{{path.basename}}'
-  namespace: '{{namespace}}'
-  valuesFiles: '{{values}}'
+#appsetTemplates:
+#  path: '{{path}}'
+#  pathBasename: '{{path.basename}}'
+#  namespace: '{{namespace}}'
+#  valuesFiles: '{{values}}'

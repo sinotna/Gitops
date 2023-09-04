@@ -1,3 +1,4 @@
+namespace: tools
 #.Values.pilot for discovery and mesh wide config
 
 ## Discovery Settings
