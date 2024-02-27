@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: platform
+  namespace: default
+spec:
+  description: platform apps
+
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  destinations:
+    - namespace: '*'
+      server: https://kubernetes.default.svc
+
+  orphanedResources:
+    warn: false # do not complain about resources deployed not with ArgoCD
+  sourceRepos:
+    # this list should only contain git(!) repositories where application manifests can be retrieved from
+    - https://github.com/sinotna/GitOps-Apps.git
+    - https://github.com/sinotna/GitopsK8SDasshboard.git

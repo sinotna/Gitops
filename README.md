@@ -5,6 +5,8 @@ ArgoCD
 2. helm install argocd ./ -n argocd --create-namespace
 3. ArgoCD should be up and running now. The secre "argocd/argocd-initial-admin-secret" is created with the admin password
 
+**All application deployment to namespace** [link](https://argo-cd.readthedocs.io/en/stable/operator-manual/app-any-namespace/#:~:text=The%20Application%20's%20namespace%20must,source%20Application%20resources%20from%20globally.)
+
 Application Sets
 All applications will automatically start after applying the application sets.
  > kubectl apply -f appilcationsets.yaml
