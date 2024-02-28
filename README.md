@@ -7,9 +7,15 @@ ArgoCD
 
 **All application deployment to namespace** [link](https://argo-cd.readthedocs.io/en/stable/operator-manual/app-any-namespace/#:~:text=The%20Application%20's%20namespace%20must,source%20Application%20resources%20from%20globally.)
 
-Application Sets
+App Apps
+
+This branch is the app of apps method.
+The argocd templates directory contains the AppProject.yaml and the Platform-rootapp.yaml files. The platform-rootapp will point to gitops-apps repo. This repo is holding the application's yaml files (kind: Application) which are pointing to the app's repository. 
+ 
 All applications will automatically start after applying the application sets.
  > kubectl apply -f appilcationsets.yaml
+
+
 
 # Sealed Secrets
 
