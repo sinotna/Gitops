@@ -11,11 +11,12 @@ spec:
       kind: '*'
   destinations:
     - namespace: '*'
-      server: https://kubernetes.default.svc
+      server: '*'
 
   orphanedResources:
     warn: false # do not complain about resources deployed not with ArgoCD
   sourceRepos:
     # this list should only contain git(!) repositories where application manifests can be retrieved from
-    - https://github.com/sinotna/GitOps-Apps.git
-    - https://github.com/sinotna/GitopsK8SDasshboard.git
+    #- https://github.com/sinotna/GitOps-Apps.git
+    #- https://github.com/sinotna/GitopsK8SDasshboard.git
+    - '*'

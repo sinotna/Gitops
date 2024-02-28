@@ -631,7 +631,8 @@ controller:
   #  repoServerTimeoutSeconds: "60"
 
   # -- Additional command line arguments to pass to application controller
-  extraArgs: []
+  extraArgs:
+    - --application-namespaces="platform-applications,platform-tools"
 
   # -- Environment variables to pass to application controller
   env: []
